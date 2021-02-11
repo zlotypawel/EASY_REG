@@ -54,9 +54,13 @@ typedef struct{
 
 int main(void)
 {
-	volatile uint32_t* apb2 = ((uint32_t*)0x40021018);
+	//volatile uint32_t* apb2 = ((uint32_t*)0x40021018);
+	//*apb2 |= (1 << 2);
 
-	*apb2 |= (1 << 2);
+	RCC_RegDef_t* pRCC = ((RCC_RegDef_t*)0x40021000);
+
+	(*pRCC).APB2ENR |= (1<<2);
+
 
    //RCC -> APB2ENR |= (1 << 2);
    GPIOA ->CRL &= ~ 0xf;
